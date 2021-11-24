@@ -1,6 +1,4 @@
 byte state = 0b10000001;
-boolean toggle1 = 0;
-boolean toggle2 = 0;
 byte seq [255];
 byte output[1000];
 int k =0;
@@ -11,7 +9,7 @@ unsigned int cnt = 0;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);
+  Serial.begin(9600);
   pinMode(3, OUTPUT);
 
  for (int i = 0; i < 254; i  = i+1) {
@@ -71,9 +69,10 @@ while (k<255){
           output[k2] = 0;
           k2=k2+1;
         }
-        /*for (int h =0; h<k2;h=h+1)  {
+        for (int h =0; h<k2;h=h+1)  {
+          //Serial.println(k2);
           Serial.print(output[h]);
-        }*/
+        }
           
 
     cli();//stop interrupts
@@ -96,20 +95,15 @@ sei();//allow interrupts
 
 
 ISR(TIMER1_COMPA_vect){//timer1 interrupt 200Hz toggles
-      if (toggle2){
         
         if (output[cnt]==1){
-         digitalWrite(3,HIGH);
+            digitalWrite(3,HIGH);
         }
-        cnt = cnt+1;
-    toggle2 = 0;
-  }
-  else{  
-        digitalWrite(3,LOW);
-        cnt = cnt+1;
-    toggle2 = 1;
-
+  
+         else{  
+            digitalWrite(3,LOW);
 }
+cnt = cnt+1;
 if(cnt == k2)
 {
   cnt=0;
