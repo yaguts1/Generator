@@ -9,11 +9,12 @@ void setup()
 {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  delay(100);
   pinMode(3, OUTPUT);
 
   for (int i = 0; i < 254; i = i + 1)
   {
-    //Serial.println(state & 1);
+    Serial.println(state & 1);
     seq[i] = state & 1;
     byte newbit = (state^(state>>3)^(state>>5)^(state>>6))&1;
     state = (state >> 1) | (newbit << 7);
@@ -32,7 +33,7 @@ void setup()
     output[k2] = 0;
     k2 = k2 + 1;
   }
-  for (int h = 0; h < k2; h = h + 1)
+  for (int h = 0; h < k2; h++)
   {
     //Serial.println(k2);
     Serial.print(output[h]);
