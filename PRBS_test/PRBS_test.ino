@@ -15,7 +15,7 @@ void setup()
   {
     //Serial.println(state & 1);
     seq[i] = state & 1;
-    byte newbit = (state ^ (state >> 1)) & 1;
+    byte newbit = (state^(state>>3)^(state>>5)^(state>>6))&1;
     state = (state >> 1) | (newbit << 7);
   }
   while (k < 255)
