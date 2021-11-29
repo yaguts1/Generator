@@ -20,12 +20,12 @@ void setup()
   }
   while (k < 255)
   {
-    for (int j=1; j < (seq[k+1] + seq[k]*2 + 1); j++){
-      output[k2+j] = 0;
-    }
     output[k2] = 1;
+    for (int j=0; j < (seq[k]*2 + seq[k+1] + 1); j++){
+      output[k2+j+1] = 0;
+    }
     k = k + 2;
-    k2 = k2 + 2 + seq[k+1] + seq[k]*2;
+    k2 = k2 + 2 +seq[k]*2 + seq[k+1] ;
   }
   for (int t = 0; t < 80; t = t + 1)
   {
