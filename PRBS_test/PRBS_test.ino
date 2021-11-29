@@ -33,10 +33,19 @@ void setup()
     output[k2] = 0;
     k2 = k2 + 1;
   }
-  for (int h = 0; h < k2; h++)
+  int k3 = 0;
+  for (int h = 0; h < k; h += 2)
   {
-    //Serial.println(k2);
-    Serial.print(output[h]);
+    Serial.print(seq[h]); 
+    Serial.print(seq[h+1]); 
+    Serial.print(" : ");
+    if(!(h < 2)) {
+      for (int j = 0; j < seq[h]*2+seq[h+1]+2; j++){
+        Serial.print(output[k3]);
+        k3++;
+      }
+    }
+    Serial.println();
   }
 
   cli(); //stop interrupts
