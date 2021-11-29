@@ -1,13 +1,15 @@
 byte state = 0b10000001;
 byte seq[255];
 byte output[1000];
-int k = 0;
 int k2 = 0;
+
 unsigned int cnt = 0;
 
 void setup()
 {
   // put your setup code here, to run once:
+  int k = 0;
+   
   Serial.begin(9600);
   delay(100);
   pinMode(3, OUTPUT);
@@ -19,14 +21,14 @@ void setup()
     byte newbit = (state^(state>>3)^(state>>5)^(state>>6))&1;
     state = (state >> 1) | (newbit << 7);
   }
-  while (k < 255)
+  while (k < 254)
   {
     output[k2] = 1;
     for (int j=0; j < (seq[k]*2 + seq[k+1] + 1); j++){
       output[k2+j+1] = 0;
     }
+    k2 = k2 + 2 +seq[k]*2 + seq[k+1];
     k = k + 2;
-    k2 = k2 + 2 +seq[k]*2 + seq[k+1] ;
   }
   for (int t = 0; t < 80; t = t + 1)
   {
@@ -34,12 +36,12 @@ void setup()
     k2 = k2 + 1;
   }
   int k3 = 0;
-  for (int h = 0; h < k; h += 2)
+  for (int h = 0; h < 254; h += 2)
   {
     Serial.print(seq[h]); 
     Serial.print(seq[h+1]); 
     Serial.print(" : ");
-    if(!(h < 2)) {
+    if(1 || !(h < 2)) {
       for (int j = 0; j < seq[h]*2+seq[h+1]+2; j++){
         Serial.print(output[k3]);
         k3++;
