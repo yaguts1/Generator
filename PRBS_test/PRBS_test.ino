@@ -41,11 +41,11 @@ void setup()
     Serial.print(seq[h]); 
     Serial.print(seq[h+1]); 
     Serial.print(" : ");
-    if(1 || !(h < 2)) {
+    
       for (int j = 0; j < seq[h]*2+seq[h+1]+2; j++){
         Serial.print(output[k3]);
         k3++;
-      }
+      
     }
     Serial.println();
   }
